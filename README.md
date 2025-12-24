@@ -16,6 +16,15 @@ $Pc_\*$: number of columns each piece
 
 $P$: each column of the piece
 
+Grid and each piece must consist only `0` and `1`, and each column must be the same length.
+
+- Grid
+    - `0` means unplaceable tile
+    - `1` means placeable tile
+- Piece
+    - `0` means empty
+    - `1` means tile
+
 ```
 C N
 
