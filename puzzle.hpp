@@ -17,11 +17,11 @@ enum Kind
 
 struct Piece
 {
-    vc<std::string> data;
+    vc<std::string> shape;
     Kind kind;
     Piece(vc<std::string> &piece)
     {
-        data = piece;
+        shape = piece;
     }
 };
 

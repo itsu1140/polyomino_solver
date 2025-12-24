@@ -29,7 +29,7 @@ void Puzzle::grid_num_check()
         for (char c : str)
             grid_cnt += c == '1';
     for (Piece piece : pieces)
-        for (std::string str : piece.data)
+        for (std::string str : piece.shape)
             for (char c : str)
                 piece_cnt += c == '1';
     std::stringstream ss;
@@ -88,34 +88,34 @@ void Puzzle::remove_double_piece()
 void rotate_piece_90deg(Piece &piece)
 {
     // rotate 90 degree
-    int h = piece.data.size(), w = piece.data[0].size();
+    int h = piece.shape.size(), w = piece.shape[0].size();
     vc<std::string> new_piece(w, std::string(h, '0'));
     for (int i = 0; i < h; i++)
         for (int j = 0; j < w; j++)
-            new_piece[w - 1 - j][i] = piece.data[i][j];
-    piece.data = new_piece;
+            new_piece[w - 1 - j][i] = piece.shape[i][j];
+    piece.shape = new_piece;
 }
 
 void rotate_piece_180deg(Piece &piece)
 {
-    int h = piece.data.size(), w = piece.data[0].size();
+    int h = piece.shape.size(), w = piece.shape[0].size();
     vc<std::string> new_piece(h, std::string(w, ' '));
     for (int i = 0; i < h; i++)
         for (int j = 0; j < w; j++)
-            new_piece[h - i - 1][w - j - 1] = piece.data[i][j];
-    piece.data = new_piece;
+            new_piece[h - i - 1][w - j - 1] = piece.shape[i][j];
+    piece.shape = new_piece;
 }
 
 bool is_same_piece(Piece &a, Piece &b)
 {
     bool is_same = false;
-    int ah = a.data.size(), aw = a.data[0].size();
-    int bh = b.data.size(), bw = b.data[0].size();
+    int ah = a.shape.size(), aw = a.shape[0].size();
+    int bh = b.shape.size(), bw = b.shape[0].size();
     auto same_check = [&](Piece &a, Piece &b)
     {
-        is_same |= a.data == b.data;
+        is_same |= a.shape == b.shape;
         rotate_piece_180deg(b);
-        is_same |= a.data == b.data;
+        is_same |= a.shape == b.shape;
     };
     if (ah == bh && aw == bw)
     {
@@ -133,11 +133,11 @@ Kind piece_kind(Piece p)
 {
     Piece cp = p;
     rotate_piece_90deg(cp);
-    if (cp.data == p.data)
+    if (cp.shape == p.shape)
         return Square;
     cp = p;
     rotate_piece_180deg(cp);
-    if (cp.data == p.data)
+    if (cp.shape == p.shape)
         return Rect;
     return Asym;
 }

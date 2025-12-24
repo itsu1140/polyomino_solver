@@ -17,17 +17,17 @@ using vv = vc<vc<T>>;
 bool canfill(Piece &piece, vc<string> &fill, Puzzle &pz, int d)
 {
     bool filled = 0;
-    for (int gi = 0; gi < fill.size() - piece.data.size() + 1; gi++)
+    for (int gi = 0; gi < fill.size() - piece.shape.size() + 1; gi++)
     {
-        for (int gj = 0; gj < fill[0].size() - piece.data[0].size() + 1; gj++)
+        for (int gj = 0; gj < fill[0].size() - piece.shape[0].size() + 1; gj++)
         {
             set<pair<int, int>> fillidx;
             bool ok = 1;
-            for (int pi = 0; pi < piece.data.size(); pi++)
+            for (int pi = 0; pi < piece.shape.size(); pi++)
             {
-                for (int pj = 0; pj < piece.data[0].size(); pj++)
+                for (int pj = 0; pj < piece.shape[0].size(); pj++)
                 {
-                    if (piece.data[pi][pj] == '0')
+                    if (piece.shape[pi][pj] == '0')
                         continue;
                     int fi = gi + pi, fj = gj + pj;
                     if (pz.grid[fi][fj] == '0' || fill[fi][fj] != '_')
