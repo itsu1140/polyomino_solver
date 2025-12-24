@@ -13,16 +13,16 @@ int main()
     int h, p;
     cin >> h >> p;
     vc<string> g(h);
-    for (int i = 0; i < h; i++)
-        cin >> g[i];
+    for (string &s : g)
+        cin >> s;
     vc<vc<string>> ps;
     for (int i = 0; i < p; i++)
     {
         int r;
         cin >> r;
         vc<string> piece(r);
-        for (int j = 0; j < r; j++)
-            cin >> piece[j];
+        for (string &s : piece)
+            cin >> s;
         ps.push_back(piece);
     }
     solve(g, ps);
